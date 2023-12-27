@@ -1,14 +1,27 @@
 //a screen that showsa all the meals for a selected category
 
-import 'package:firebase_project/main.dart';
+import 'package:firebase_project/data/dummy_data.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_project/models/meal.dart';
 import 'package:firebase_project/widgets/meal_item.dart';
+import 'package:firebase_project/screens/meal_details.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({super.key, required this.title, required this.meals});
   final String title;
   final List<Meal> meals;
+
+  void _onSelectMealDetails(BuildContext context, Meal meal) {
+    // final Meal specifecMeal =
+    // dummyMeals.where((meal1) => meal1.id.contains(meal.id));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MealDetailsScreen(
+          meal: meal,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +53,12 @@ class MealsScreen extends StatelessWidget {
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+        itemBuilder: (ctx, index) => MealItem(
+          meal: meals[index],
+          onSelectMealDetails: (meal) {
+            _onSelectMealDetails(context, meal);
+          },
+        ),
       );
     }
 

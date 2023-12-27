@@ -1,4 +1,4 @@
-import 'package:firebase_project/screens/categories.dart';
+import 'package:firebase_project/screens/tabs.dart';
 
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: const CategoriesScreen(),
+      home: const TabsScreen(),
     );
   }
 }
