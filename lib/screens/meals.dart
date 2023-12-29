@@ -7,9 +7,11 @@ import 'package:firebase_project/widgets/meal_item.dart';
 import 'package:firebase_project/screens/meal_details.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key, required this.title, required this.meals});
-  final String title;
+  const MealsScreen(
+      {super.key, this.title, required this.meals, required this.onToggleFav});
+  final String? title;
   final List<Meal> meals;
+  final void Function(Meal meal) onToggleFav;
 
   void _onSelectMealDetails(BuildContext context, Meal meal) {
     // final Meal specifecMeal =
@@ -18,6 +20,7 @@ class MealsScreen extends StatelessWidget {
       MaterialPageRoute(
         builder: (ctx) => MealDetailsScreen(
           meal: meal,
+          onToggleFav: onToggleFav,
         ),
       ),
     );
@@ -69,9 +72,11 @@ class MealsScreen extends StatelessWidget {
     //           ),
     //     ),
 
+    if (title == null) return content;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );
